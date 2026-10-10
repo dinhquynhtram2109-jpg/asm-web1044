@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bita's - Trang chủ</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-left">
+        <span>Bạn đang mua sắm tại: </span>
+        <select>
+          <option>Bita's Miền Nam</option>
+          <option>Bita's Miền Bắc</option>
+        </select>
+      </div>
+      <div class="topbar-right">
+        <a href="#">Cửa hàng lẻ Bita's</a> | <a href="login.html">Đăng nhập/Đăng ký</a>
+      </div>
+    </div>
+
+    <header>
+      <div class="header-top"><p>HOTLINE: 1900 xxx xxx</p></div>
+      <div class="header-main">
+        <a href="index.html" class="logo">BITA'S</a>
+        <nav>
+          <ul>
+            <li><a href="index.html" class="active">TRANG CHỦ</a></li>
+            <li><a href="product.html">TẤT CẢ SẢN PHẨM</a></li>
+            <li><a href="Nam.html">NAM</a></li>
+            <li><a href="Nu.html">NỮ</a></li>
+            <li><a href="BeTrai.html">BÉ TRAI</a></li>
+            <li><a href="BeGai.html">BÉ GÁI</a></li>
+            <li><a href="cart.html">GIỎ HÀNG</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="banner-slider">
+      <div class="slides">
+        <img src="image/bitas-banner.jpg" class="slide active" alt="Banner 1" />
+        <img src="image/nam-2.jpg" class="slide" alt="Banner 2" />
+        <img src="image/nu-3.jpg" class="slide" alt="Banner 3" />
+      </div>
+    </section>
+
+    <div class="container">
+      <h2 class="section-title">SẢN PHẨM MỚI (NEW)</h2>
+      <div class="product-grid" id="new-products"></div>
+
+      <h2 class="section-title">SẢN PHẨM NỔI BẬT (HOT)</h2>
+      <div class="product-grid" id="hot-products"></div>
+    </div>
+
+    <footer><p>&copy; 2026 Bita's Footwear. Bảo lưu mọi quyền.</p></footer>
+
+    <script src="data.js"></script>
+    <script>
+      let current = 0;
+      const slides = document.querySelectorAll(".slide");
+      if (slides.length > 0) {
+        setInterval(() => {
+          slides[current].classList.remove("active");
+          current = (current + 1) % slides.length;
+          slides[current].classList.add("active");
+        }, 3000);
+      }
+
+      document.getElementById("new-products").innerHTML = products
+        .filter((p) => p.isNew)
+        .slice(0, 3)
+        .map(renderProductCard)
+        .join("");
+
+      document.getElementById("hot-products").innerHTML = products
+        .filter((p) => p.isHot)
+        .slice(0, 3)
+        .map(renderProductCard)
+        .join("");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bita's - Giỏ Hàng</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-main">
+        <a href="index.html" class="logo">BITA'S</a>
+        <nav>
+          <ul>
+            <li><a href="index.html">TRANG CHỦ</a></li>
+            <li><a href="product.html">TẤT CẢ SẢN PHẨM</a></li>
+            <li><a href="nam.html">NAM</a></li>
+            <li><a href="nu.html">NỮ</a></li>
+            <li><a href="betrai.html">BÉ TRAI</a></li>
+            <li><a href="begai.html">BÉ GÁI</a></li>
+            <li><a href="cart.html" class="active">GIỎ HÀNG</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <a href="index.html" class="btn-back-bar">← Tiếp tục mua sắm (Quay lại trang chủ)</a>
+      <h2 class="section-title">GIỎ HÀNG CỦA BẠN</h2>
+      <div class="cart-flex">
+        <div class="cart-left">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cart-list"></tbody>
+          </table>
+        </div>
+
+        <div class="cart-right">
+          <h3>TỔNG CỘNG</h3>
+          <hr style="margin: 10px 0" />
+          <div class="summary-row">
+            <span>Tạm tính:</span>
+            <span id="subtotal">0đ</span>
+          </div>
+          <div class="summary-row">
+            <span>Phí vận chuyển:</span>
+            <span>Miễn phí</span>
+          </div>
+          <div class="summary-row total">
+            <span>TỔNG TIỀN:</span>
+            <span id="total-price">0đ</span>
+          </div>
+          <a href="checkout.html" class="btn-checkout">TIẾP TỤC THANH TOÁN</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+      function renderCart() {
+        const tbody = document.getElementById("cart-list");
+        let grandTotal = 0;
+
+        if (cart.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Giỏ hàng của bạn đang trống!</td></tr>`;
+          document.getElementById("subtotal").innerText = "0đ";
+          document.getElementById("total-price").innerText = "0đ";
+          return;
+        }
+
+        tbody.innerHTML = cart
+          .map((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            grandTotal += itemTotal;
+            return `
+                    <tr>
+                        <td style="display:flex; align-items:center; gap:10px;">
+                            <img src="${item.image}" onerror="this.src='https://via.placeholder.com/60'">
+                            <span>${item.name}</span>
+                        </td>
+                        <td>${formatCurrency(item.price)}</td>
+                        <td>
+                            <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                            <span style="margin: 0 8px; font-weight:bold;">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                        </td>
+                        <td style="font-weight:bold;">${formatCurrency(itemTotal)}</td>
+                        <td><button class="btn-delete" onclick="removeItem(${index})">✕</button></td>
+                    </tr>
+                `;
+          })
+          .join("");
+
+        document.getElementById("subtotal").innerText = formatCurrency(grandTotal);
+        document.getElementById("total-price").innerText = formatCurrency(grandTotal);
+      }
+
+      function updateQty(index, change) {
+        cart[index].quantity += change;
+        if (cart[index].quantity <= 0) cart.splice(index, 1);
+        saveCart();
+        renderCart();
+      }
+
+      function removeItem(index) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCart();
+      }
+
+      document.addEventListener("DOMContentLoaded", renderCart);
+    </script>
+  </body>
+</html>

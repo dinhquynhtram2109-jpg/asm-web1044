@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bita's - Thanh Toán</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-main">
+        <a href="index.html" class="logo">BITA'S</a>
+      </div>
+    </header>
+
+    <div class="container">
+      <a href="cart.html" class="btn-back-bar">← Quay lại giỏ hàng</a>
+      <h2 class="section-title">XÁC NHẬN ĐƠN HÀNG</h2>
+      <div class="cart-flex">
+        <div class="cart-left">
+          <h3>THÔNG TIN GIAO HÀNG</h3>
+          <form
+            id="checkout-form"
+            style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px"
+          >
+            <input type="text" placeholder="Họ và tên" style="padding: 10px" required />
+            <input type="text" placeholder="Số điện thoại" style="padding: 10px" required />
+            <input type="text" placeholder="Địa chỉ giao hàng" style="padding: 10px" required />
+          </form>
+        </div>
+        <div class="cart-right">
+          <h3>TÓM TẮT ĐƠN HÀNG</h3>
+          <hr style="margin: 10px 0" />
+          <div id="checkout-summary"></div>
+          <div class="summary-row total">
+            <span>Tổng thanh toán:</span>
+            <span id="checkout-total">0đ</span>
+          </div>
+          <button
+            onclick="
+              alert('Đặt hàng thành công!');
+              localStorage.removeItem('bitas_cart');
+              window.location.href = 'index.html';
+            "
+            class="btn-checkout"
+          >
+            ĐẶT HÀNG NGAY
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+      function renderCheckout() {
+        let total = 0;
+        const summaryBox = document.getElementById("checkout-summary");
+        summaryBox.innerHTML = cart
+          .map((item) => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            return `
+                    <div class="summary-row">
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>${formatCurrency(itemTotal)}</span>
+                    </div>
+                `;
+          })
+          .join("");
+        document.getElementById("checkout-total").innerText = formatCurrency(total);
+      }
+      document.addEventListener("DOMContentLoaded", renderCheckout);
+    </script>
+  </body>
+</html>

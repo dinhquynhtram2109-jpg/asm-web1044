@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bita's - Chi Tiết Sản Phẩm</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-main">
+        <a href="index.html" class="logo">BITA'S</a>
+        <nav>
+          <ul>
+            <li><a href="index.html">TRANG CHỦ</a></li>
+            <li><a href="product.html">TẤT CẢ SẢN PHẨM</a></li>
+            <li><a href="nam.html">NAM</a></li>
+            <li><a href="nu.html">NỮ</a></li>
+            <li><a href="betrai.html">BÉ TRAI</a></li>
+            <li><a href="begai.html">BÉ GÁI</a></li>
+            <li><a href="cart.html">GIỎ HÀNG</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <a href="javascript:history.back()" class="btn-back-bar">← Quay lại trang trước</a>
+      <div id="detail-container"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+      function renderDetail() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get("id")) || 1;
+        const product = products.find((p) => p.id === productId) || products[0];
+
+        document.getElementById("detail-container").innerHTML = `
+                <div style="display: flex; gap: 40px; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <div style="flex: 1;">
+                        <img src="${product.image}" style="width: 100%; border-radius: 8px;" onerror="this.src='https://via.placeholder.com/400'">
+                    </div>
+                    <div style="flex: 1.5;">
+                        <h1 style="font-size: 26px; margin-bottom: 10px;">${product.name}</h1>
+                        <p style="color: #666; margin-bottom: 15px;">Mã sản phẩm: BTS-00${product.id}</p>
+                        <h2 style="color: #d71920; font-size: 28px; margin-bottom: 20px;">${formatCurrency(product.price)}</h2>
+                        <p style="margin-bottom: 20px; color: #555;">Chất liệu cao cấp, độ bền vượt trội, mang lại cảm giác êm ái nhẹ nhàng khi vận động.</p>
+                        <button onclick="addToCartAndGo(${product.id})" class="btn-checkout" style="width: 220px;">THÊM VÀO GIỎ HÀNG</button>
+                    </div>
+                </div>
+            `;
+      }
+
+      function addToCartAndGo(id) {
+        addToCart(id);
+        window.location.href = "cart.html";
+      }
+
+      document.addEventListener("DOMContentLoaded", renderDetail);
+    </script>
+  </body>
+</html>

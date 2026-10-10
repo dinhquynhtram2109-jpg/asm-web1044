@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bita's - Đăng nhập & Đăng ký</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="auth-container" id="login-box">
+      <h2>ĐĂNG NHẬP</h2>
+      <form
+        onsubmit="
+          event.preventDefault();
+          alert('Đăng nhập thành công!');
+          window.location.href = 'index.html';
+        "
+      >
+        <input type="text" placeholder="Email hoặc Số điện thoại" class="input-box" required />
+        <input type="password" placeholder="Mật khẩu" class="input-box" required />
+        <button type="submit" class="btn-submit">ĐĂNG NHẬP</button>
+      </form>
+      <a
+        href="#register-box"
+        class="toggle-link"
+        onclick="
+          document.getElementById('login-box').style.display = 'none';
+          document.getElementById('register-box').style.display = 'block';
+        "
+      >
+        Chưa có tài khoản? <b>Đăng ký ngay</b>
+      </a>
+      <a href="index.html" class="toggle-link">← Quay lại trang chủ</a>
+    </div>
+
+    <div class="auth-container" id="register-box" style="display: none">
+      <h2>ĐĂNG KÝ</h2>
+      <form
+        onsubmit="
+          event.preventDefault();
+          alert('Đăng ký thành công!');
+          document.getElementById('register-box').style.display = 'none';
+          document.getElementById('login-box').style.display = 'block';
+        "
+      >
+        <input type="text" placeholder="Họ và tên" class="input-box" required />
+        <input type="text" placeholder="Số điện thoại" class="input-box" required />
+        <input type="password" placeholder="Mật khẩu" class="input-box" required />
+        <button type="submit" class="btn-submit">ĐĂNG KÝ NGAY</button>
+      </form>
+      <a
+        href="#login-box"
+        class="toggle-link"
+        onclick="
+          document.getElementById('register-box').style.display = 'none';
+          document.getElementById('login-box').style.display = 'block';
+        "
+      >
+        Đã có tài khoản? <b>Đăng nhập</b>
+      </a>
+      <a href="index.html" class="toggle-link">← Quay lại trang chủ</a>
+    </div>
+  </body>
+</html>

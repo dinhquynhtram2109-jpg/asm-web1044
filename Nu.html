@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bita's - Giày Nữ</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-left">
+        <span>Bạn đang mua sắm tại: </span>
+        <select>
+          <option>Bita's Miền Nam</option>
+        </select>
+      </div>
+      <div class="topbar-right"><a href="login.html">Đăng nhập/Đăng ký</a></div>
+    </div>
+
+    <header>
+      <div class="header-main">
+        <a href="index.html" class="logo">BITA'S</a>
+        <nav>
+          <ul>
+            <li><a href="index.html">TRANG CHỦ</a></li>
+            <li><a href="product.html">TẤT CẢ SẢN PHẨM</a></li>
+            <li><a href="nam.html">NAM</a></li>
+            <li><a href="nu.html" class="active">NỮ</a></li>
+            <li><a href="betrai.html">BÉ TRAI</a></li>
+            <li><a href="begai.html">BÉ GÁI</a></li>
+            <li><a href="cart.html">GIỎ HÀNG</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="product-container">
+      <aside class="sidebar">
+        <a href="index.html" class="btn-back-bar">← Quay lại trang chủ</a>
+        <h3>DANH MỤC</h3>
+        <ul>
+          <li>Giày Nữ</li>
+          <li>Sandal Nữ</li>
+          <li>Giày Cao Gót</li>
+          <li>Giày Búp Bê</li>
+        </ul>
+      </aside>
+      <section class="product-list">
+        <h2 class="section-title">GIÀY NỮ</h2>
+        <div class="product-grid" id="category-products"></div>
+      </section>
+    </div>
+
+    <footer><p>&copy; 2026 Bita's Footwear.</p></footer>
+
+    <script src="data.js"></script>
+    <script>
+      const list = products.filter((p) => p.category === "nu");
+      document.getElementById("category-products").innerHTML = list.map(renderProductCard).join("");
+    </script>
+  </body>
+</html>

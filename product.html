@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bita's - Tất cả sản phẩm</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-left">
+        <span>Bạn đang mua sắm tại: </span>
+        <select>
+          <option>Bita's Miền Nam</option>
+          <option>Bita's Miền Bắc</option>
+        </select>
+      </div>
+      <div class="topbar-right">
+        <a href="#">Cửa hàng lẻ Bita's</a> | <a href="login.html">Đăng nhập/Đăng ký</a>
+      </div>
+    </div>
+
+    <header>
+      <div class="header-top"><p>HOTLINE: 1900 xxx xxx</p></div>
+      <div class="header-main">
+        <a href="index.html" class="logo">BITA'S</a>
+        <nav>
+          <ul>
+            <li><a href="index.html">TRANG CHỦ</a></li>
+            <li><a href="product.html" class="active">TẤT CẢ SẢN PHẨM</a></li>
+            <li><a href="Nam.html">NAM</a></li>
+            <li><a href="Nu.html">NỮ</a></li>
+            <li><a href="BeTrai.html">BÉ TRAI</a></li>
+            <li><a href="BeGai.html">BÉ GÁI</a></li>
+            <li><a href="cart.html">GIỎ HÀNG</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container" style="margin-top: 30px">
+      <h2 class="section-title">TẤT CẢ SẢN PHẨM</h2>
+      <div class="product-grid" id="all-products"></div>
+    </div>
+
+    <footer><p>&copy; 2026 Bita's Footwear. Bảo lưu mọi quyền.</p></footer>
+
+    <script src="data.js"></script>
+    <script>
+      document.getElementById("all-products").innerHTML = products.map(renderProductCard).join("");
+    </script>
+  </body>
+</html>
